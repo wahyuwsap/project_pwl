@@ -20,6 +20,6 @@ Route::get('/', function () {
 });
 
 Route::get('/cobadeh/{nama}/{npm}/{kelas}', [ProfileController::class, 'apaja']);
-Route::get('/user', [UserController::class, 'index']);
+Route::get('/user', [UserController::class, 'index'])->name('user.index');
 Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
 Route::post('/user', [UserController::class, 'store'])->name('user.store');

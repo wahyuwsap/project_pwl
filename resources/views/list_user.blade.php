@@ -2,29 +2,34 @@
 
 @section('content')
 
-<h1>Daftar Pengguna</h1>
+{{-- Navbar --}}
+@include('components.navbar')
 
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nama</th>
-            <th>NPM</th>
-            <th>Kelas</th>
-        </tr>
-    </thead>
-    <tbody>
+<div class="container py-5">
 
-        @foreach ($users as $user)
-            <tr>
-                <td>{{ $user->id }}</td>
-                <td>{{ $user->nama }}</td>
-                <td>{{ $user->nim }}</td>
-                <td>{{ $user->nama_kelas }}</td>
-            </tr>
-        @endforeach
+    {{-- Header --}}
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="fw-bold text-primary mb-0">Daftar Pengguna</h1>
+            <p class="text-muted">Menampilkan seluruh data pengguna sistem</p>
+        </div>
 
-    </tbody>
-</table>
+        <a href="{{ route('user.create') }}" class="btn btn-primary shadow-sm">
+            <i class="bi bi-person-plus-fill"></i> Tambah Pengguna
+        </a>
+    </div>
+
+    {{-- Card Container --}}
+    <div class="card border-0 shadow-sm rounded-4">
+        <div class="card-body">
+            {{-- Komponen tabel user --}}
+            <x-user-table :users="$users" />
+        </div>
+    </div>
+
+</div>
+
+{{-- Footer --}}
+@include('components.footer')
 
 @endsection
