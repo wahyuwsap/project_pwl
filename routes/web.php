@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\MataKuliahController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +24,7 @@ Route::get('/cobadeh/{nama}/{npm}/{kelas}', [ProfileController::class, 'apaja'])
 Route::get('/user', [UserController::class, 'index'])->name('user.index');
 Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
 Route::post('/user', [UserController::class, 'store'])->name('user.store');
+
+Route::get('/matakuliah', [MatakuliahController::class, 'index']);
+Route::get('/matakuliah/create', [MatakuliahController::class, 'create'])->name('matakuliah.create');
+Route::post('/matakuliah', [MatakuliahController::class, 'store'])->name('matakuliah.store');
