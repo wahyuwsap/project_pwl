@@ -1,9 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\MataKuliahController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,18 +18,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/cobadeh/{nama}/{npm}/{kelas}', [ProfileController::class, 'apaja']);
-Route::get('/user', [UserController::class, 'index'])->name('user.index');
-Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
-Route::post('/user', [UserController::class, 'store'])->name('user.store');
-Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
-Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
-Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/matakuliah', [MatakuliahController::class, 'index']);
-Route::get('/matakuliah/create', [MatakuliahController::class, 'create'])->name('matakuliah.create');
-Route::post('/matakuliah', [MatakuliahController::class, 'store'])->name('matakuliah.store');
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
-Route::get('/mata-kuliah/{id}/edit', [MatakuliahController::class, 'edit'])->name('matakuliah.edit');
-Route::put('/mata-kuliah/{id}', [MatakuliahController::class, 'update'])->name('matakuliah.update');
-Route::delete('/mata-kuliah/{id}', [MatakuliahController::class, 'destroy'])->name('matakuliah.destroy');
+require __DIR__.'/auth.php';
